@@ -671,7 +671,7 @@ CSV files should include the following columns:
 
 ## Reference
 - Image data extracted from pdf through below website and preprocess with python:
-https://www.beefitswhatsfordinner.com/cuts/cut-charts
+  - https://www.beefitswhatsfordinner.com/cuts/cut-charts
 
 
 
