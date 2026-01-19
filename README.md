@@ -8,7 +8,7 @@ A full-stack application for browsing and managing beef cuts with detailed infor
 ![Application Demo](./Application_Demo_frontend.gif)
 
 ### frontend admin
-![Application Demo](./Application_Demo_admin.gif)
+![Application Demo](./Application_Demo_frontend_admin.gif)
 
 
 ## Table of Contents
