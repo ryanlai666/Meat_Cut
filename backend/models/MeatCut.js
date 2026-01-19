@@ -91,15 +91,24 @@ export class MeatCut {
     const validOrderBy = ['id', 'name', 'created_at', 'updated_at'].includes(orderBy) ? orderBy : 'name';
     const orderDirection = options.orderDirection === 'DESC' ? 'DESC' : 'ASC';
     
-    let query = `SELECT * FROM meat_cuts ORDER BY ${validOrderBy} ${orderDirection}`;
-    if (limit) {
-      query += ` LIMIT ${limit}`;
-      if (offset) {
-        query += ` OFFSET ${offset}`;
-      }
-    }
+    // Validate limit and offset to prevent SQL injection (use parameterized queries)
+    const validatedLimit = limit && limit > 0 ? parseInt(limit, 10) : null;
+    const validatedOffset = offset && offset >= 0 ? parseInt(offset, 10) : null;
     
-    const meatCuts = db.prepare(query).all();
+    let query = `SELECT * FROM meat_cuts ORDER BY ${validOrderBy} ${orderDirection}`;
+    let meatCuts;
+    
+    if (validatedLimit) {
+      query += ` LIMIT ?`;
+      if (validatedOffset) {
+        query += ` OFFSET ?`;
+        meatCuts = db.prepare(query).all(validatedLimit, validatedOffset);
+      } else {
+        meatCuts = db.prepare(query).all(validatedLimit);
+      }
+    } else {
+      meatCuts = db.prepare(query).all();
+    }
     return meatCuts.map(mc => this.formatMeatCut(mc));
   }
   

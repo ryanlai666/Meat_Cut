@@ -1,5 +1,5 @@
 import Database from 'better-sqlite3';
-import { readFileSync } from 'fs';
+import { readFileSync, mkdirSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from 'dotenv';
@@ -13,8 +13,6 @@ const __dirname = dirname(__filename);
 const DB_PATH = process.env.DB_PATH || join(__dirname, '../data/meat_cuts.db');
 
 // Ensure data directory exists
-import { mkdirSync } from 'fs';
-import { existsSync } from 'fs';
 
 const dataDir = join(__dirname, '../data');
 if (!existsSync(dataDir)) {
@@ -38,14 +36,12 @@ export function initializeDatabase() {
   
   // Read and execute initialization SQL
   const initSqlPath = join(__dirname, '../migrations/init.sql');
+  
+  if (!existsSync(initSqlPath)) {
+    throw new Error(`Database initialization SQL file not found at: ${initSqlPath}`);
+  }
+  
   const initSql = readFileSync(initSqlPath, 'utf-8');
-  
-  // Execute SQL statements (split by semicolon, but be careful with triggers/functions)
-  const statements = initSql
-    .split(';')
-    .map(s => s.trim())
-    .filter(s => s.length > 0 && !s.startsWith('--'));
-  
   database.exec(initSql);
   
   console.log('Database initialized successfully');

@@ -86,7 +86,7 @@ export function importMeatCutsFromCSV(csvPath) {
             // Create meat cut data
             const meatCutData = {
               name: row['Name'] || row['name'] || '',
-              chineseName: row['Chinese Name'] || row['Chinese Name'] || row['chineseName'] || '',
+              chineseName: row['Chinese Name'] || row['chineseName'] || '',
               part: row['Part'] || row['part'] || '',
               lean: lean,
               priceMin: prices.min,

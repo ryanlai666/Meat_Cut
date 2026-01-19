@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from 'dotenv';
@@ -22,8 +22,8 @@ export function initializeDriveClient() {
   
   try {
     // Check if file exists
-    if (!readFileSync(credentialsPath)) {
-       throw new Error(`Credentials file not found at ${credentialsPath}`);
+    if (!existsSync(credentialsPath)) {
+      throw new Error(`Credentials file not found at ${credentialsPath}`);
     }
 
     // Create Google Auth client

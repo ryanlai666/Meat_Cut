@@ -566,37 +566,6 @@ router.post('/meat-cuts/bulk-delete', asyncHandler(async (req, res) => {
 }));
 
 /**
- * GET /api/admin/drive/images
- * List all images from Google Drive
- */
-router.get('/drive/images', asyncHandler(async (req, res) => {
-  try {
-    const files = await googleDriveService.listFiles();
-    const imageFiles = files
-      .filter(file => file.mimeType && file.mimeType.startsWith('image/'))
-      .map(file => ({
-        id: file.id,
-        name: file.name,
-        mimeType: file.mimeType,
-        createdTime: file.createdTime,
-        modifiedTime: file.modifiedTime
-      }));
-    
-    res.json({
-      success: true,
-      images: imageFiles
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: {
-        message: error.message
-      }
-    });
-  }
-}));
-
-/**
  * GET /api/admin/export/csv
  * Export all meat cuts to CSV format (download)
  */
