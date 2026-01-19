@@ -668,7 +668,9 @@ CSV files should include the following columns:
    - Backend logs appear in the console
    - Check browser console for frontend errors
 
-## The Image data are extracted from pdf from:
+
+## Reference
+- Image data extracted from pdf through below website and preprocess with python:
 https://www.beefitswhatsfordinner.com/cuts/cut-charts
 
 
