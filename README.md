@@ -1,6 +1,15 @@
 # Meat Cut App
 
-A full-stack application for browsing and managing beef cuts with detailed information, search capabilities, and Google Drive API integration for image storage/usage/update.
+A full-stack application for browsing and managing beef cuts with detailed information, search capabilities, and Google Drive API integration for image storage/usage/update/sync and maintain datasets unique.
+
+## Demo
+
+### frontend
+![Application Demo](./Application_Demo_frontend.gif)
+
+### frontend admin
+![Application Demo](./Application_Demo_admin.gif)
+
 
 ## Table of Contents
 
@@ -659,14 +668,9 @@ CSV files should include the following columns:
    - Backend logs appear in the console
    - Check browser console for frontend errors
 
-## License
+## The Image data are extracted from pdf from:
+https://www.beefitswhatsfordinner.com/cuts/cut-charts
 
-[Add your license information here]
 
-## Contributing
 
-[Add contribution guidelines here]
 
-## Support
-
-For issues and questions, please [create an issue](link-to-issues) or contact [your contact information].
