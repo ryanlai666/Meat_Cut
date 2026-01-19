@@ -1,6 +1,6 @@
 # Meat Cut App
 
-A full-stack application for browsing and managing beef cuts with detailed information, search capabilities, and Google Drive integration for image storage.
+A full-stack application for browsing and managing beef cuts with detailed information, search capabilities, and Google Drive API integration for image storage/usage/update.
 
 ## Table of Contents
 
@@ -249,7 +249,7 @@ VITE_API_BASE_URL=http://localhost:5000/api
    - Copy the folder IDs from the URLs and add them to `.env`
 
 5. **Place credentials:**
-   - Save the JSON key file as `meat-buyer-guide-39a5081fce50-key.json` in the `backend/` directory
+   - Save the JSON key file as `meat-buyer-guide-XXXXXXXX.json` in the `backend/` directory
    - Or update `GOOGLE_APPLICATION_CREDENTIALS` in `.env` with the correct path
 
 ## Database Schema
