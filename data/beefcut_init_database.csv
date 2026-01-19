@@ -1,0 +1,64 @@
+﻿ID,Name,Chinese Name,Part,Lean,Approx. Price,Rec. Cooking Methods,Recommended Dishes,Texture & Notes,image reference
+1,Arm Chuck Roast,牛臂肉塊 / 前腿心肉,Chuck,No,$6 – $9,"Braising, Stewing, Slow Cooker","Pot roast, beef stew, tacos",Rich beefy flavor; firm texture that becomes tender and falls apart when slow-cooked.,beef_cut_r1_c1
+2,Arm Chuck Steak,牛臂牛排 / 前腿心牛排,Chuck,No,$7 – $10,"Braising, Marinate & Grill","Swiss steak, braised steak",Chewy if not tenderized; contains connective tissue that softens with moist heat.,beef_cut_r2_c1
+3,Blade Chuck Roast,板腱肉塊,Chuck,No,$7 – $10,"Braising, Slow Cooker","Sunday pot roast, pulled beef",Fatty and flavorful; excellent collagen breakdown makes it succulent.,beef_cut_r3_c1
+4,Blade Chuck Steak,板腱牛排,Chuck,No,$7 – $10,"Braising, Pan-Sear then Braise","Steak pizzaiola, cubed steaks",Similar to the roast but thinner; can be tough without moist heat.,beef_cut_r4_c1
+5,7-Bone Chuck Roast,七骨烤肉 / 7骨牛排,Chuck,No,$7 – $9,"Braising, Slow Cooker","Pot roast, shredded BBQ","Named for ""7"" shaped bone; very rich flavor, moist when braised.",beef_cut_r5_c1
+6,Chuck Center Roast,肩胛中心肉,Chuck,No,$7 – $10,"Oven Roasting, Braising, Smoking","Roast beef dinner, smoked beef",Balance of tender/tough muscles; juicy if not overcooked.,beef_cut_r6_c1
+7,Denver Steak,丹佛牛排 / 翼板牛排,Chuck,No,$10 – $14,"Grilling, Skillet, Broiling, Sous Vide","Steak frites, stir-fry, tacos",Surprisingly tender for chuck; well-marbled and rich flavor.,beef_cut_r7_c1
+8,Chuck Eye Roast,肩胛肋眼肉,Chuck,No,$8 – $11,"Oven Roasting, Braising, Slow Cooker",Poor Man's Ribeye roast,Continuation of Ribeye muscle; tender and flavorful but fatty.,beef_cut_r8_c1
+9,Chuck Eye Steak,肩胛肋眼牛排,Chuck,No,$9 – $13,"Grilling, Skillet, Broiling","Steak and eggs, weeknight steak","""The Poor Man's Ribeye""; excellent value, tender, and juicy.",beef_cut_r9_c1
+10,Country-Style Ribs,鄉村風味牛肋排,Chuck,No,$6 – $9,"Braising, Stewing, Slow Cooker",Boneless BBQ ribs,Meaty and fatty; fork-tender when cooked low and slow.,beef_cut_r10_c1
+11,Cross Rib Chuck Roast,肩胛底板肉 / 交叉肋肉,Chuck,Yes,$7 – $9,"Oven Roasting, Braising, Slow Cooker","Pot roast, sliced sandwiches",Firmer/leaner than other chuck roasts; needs liquid to stay moist.,beef_cut_r1_c2
+12,Shoulder Roast,牛肩肉,Chuck,Yes,$6 – $9,"Oven Roasting, Braising, Slow Cooker","Pot roast, stew meat",Lean and tough; becomes shreddable with long braising.,beef_cut_r2_c2
+13,Shoulder Steak*,牛肩牛排,Chuck,Yes,$7 – $10,"Grilling, Skillet, Broiling, Marinate","Fajitas, marinated salads",Fibrous and tough; essential to marinate before high heat.,beef_cut_r3_c2
+14,Ranch Steak*,牧場牛排 / 肩心牛排,Chuck,Yes,$8 – $11,"Grilling, Skillet, Broiling","Steak salad, sandwiches",Lean with mild flavor; can be chewy if cooked past medium.,beef_cut_r4_c2
+15,Flat Iron Steak,平鐵牛排 / 翼板牛排,Chuck,No,$11 – $16,"Grilling, Skillet, Broiling, Stir-fry","Tacos, fajitas, steak frites",Extremely tender (2nd to filet); well-marbled and beefy.,beef_cut_r5_c2
+16,Top Blade Steak*,板腱牛排,Chuck,No,$8 – $12,"Grilling, Skillet, Braising",Flat iron (if gristle removed),Flavorful but has a tough line of gristle down the center.,beef_cut_r6_c2
+17,Shoulder Petite Tender,嫩肩里肌 / 黃瓜條,Chuck,Yes,$10 – $14,"Oven Roasting, Grilling, Broiling","Medallions, Wellington alt.","""Teres Major""; resembles tenderloin in texture but has more flavor.",beef_cut_r7_c2
+18,Shoulder Petite Tender Medallions,嫩肩里肌片 / 嫩肩菲力,Chuck,Yes,$11 – $15,"Grilling, Skillet, Broiling","Steak au poivre, appetizers",Tender rounds perfect for quick searing; lean and elegant.,beef_cut_r8_c2
+19,"Short Ribs, Bone-In",帶骨牛小排,Chuck/Rib,No,$10 – $15,"Braising, Stewing, Smoking","Galbi (Korean), braised ribs","Very rich, high fat; melts into a buttery texture when braised.",beef_cut_r10_c7
+20,Prime Rib Roast,頂級肋眼視肉 / 燒烤肋眼,Rib,No,$18 – $28,"Oven Roasting, Smoking",Holiday standing rib roast,"The gold standard; exceptionally tender, juicy, and marbled.",beef_cut_r1_c3
+21,"Ribeye Steak, Bone-In",帶骨肋眼牛排,Rib,No,$16 – $26,"Grilling, Skillet, Reverse Sear","Cowboy steak, tomahawk","Rich, buttery fat rendering; bone adds flavor/insulation.",beef_cut_r2_c3
+22,Back Ribs,牛背肋排,Rib,No,$6 – $9,"Grilling, Oven Roasting, Smoking",BBQ beef ribs,Meat between rib bones; chewy but flavorful finger food.,beef_cut_r3_c3
+23,"Ribeye Roast, Boneless",去骨肋眼肉,Rib,No,$19 – $29,"Oven Roasting, Rotisserie","Delmonico roast, sliced beef","Same as Prime Rib w/o bones; easier to carve, very tender.",beef_cut_r4_c3
+24,"Ribeye Steak, Boneless",去骨肋眼牛排,Rib,No,$18 – $30,"Grilling, Skillet, Sous Vide","Steak dinner, sandwiches","Highly marbled with distinct fat ""kernel""; robust beef flavor.",beef_cut_r5_c3
+25,Ribeye Cap Steak,老饕牛排 / 肋眼眉,Rib,No,$25 – $40,"Grilling, Skillet, Broiling",Spinalis dorsi steak,"""The Butcher's Butter""; arguably the most delicious cut on the cow.",beef_cut_r6_c3
+26,Ribeye Petite Roast,小肋眼肉,Rib,No,$16 – $24,Oven Roasting,Small dinner roast,A smaller portion of the ribeye; quick cooking and tender.,beef_cut_r7_c3
+27,Ribeye Filet,肋眼菲力,Rib,No,$20 – $32,"Grilling, Skillet, Broiling",Steak medallions,Center eye of ribeye; combines filet tenderness with ribeye flavor.,beef_cut_r8_c3
+28,Porterhouse Steak,紅屋牛排,Loin,No,$18 – $30,"Grilling, Skillet, Broiling","The ""King of Steaks""",Two steaks in one (Strip + large Tenderloin).,beef_cut_r1_c4
+29,T-Bone Steak,丁骨牛排,Loin,No,$16 – $26,"Grilling, Skillet, Broiling",Classic steakhouse dinner,Similar to Porterhouse but with smaller tenderloin section.,beef_cut_r2_c4
+30,"Strip Steak, Bone-In",帶骨紐約客牛排,Loin,Yes,$14 – $22,"Grilling, Skillet, Broiling","Kansas City strip, club steak","Firm bite, moderate marbling, deep beefy flavor.",beef_cut_r3_c4
+31,"Strip Steak, Boneless",無骨紐約客牛排,Loin,Yes,$15 – $25,"Grilling, Skillet, Sous Vide","New York strip, steak frites",Tighter texture than ribeye but flavorful; lean but tender.,beef_cut_r4_c4
+32,Strip Petite Roast,紐約客小烤肉,Loin,Yes,$14 – $22,Oven Roasting,Roast beef for two,A small roast cut from the strip loin; easy to carve.,beef_cut_r5_c4
+33,Strip Filet,紐約客菲力,Loin,Yes,$16 – $26,"Grilling, Skillet, Broiling",Thick-cut steak,Thick cut from center of strip; uniform shape cooks evenly.,beef_cut_r6_c4
+34,Tenderloin Roast,菲力肉塊 / 腰內肉,Loin,Yes,$25 – $45,"Oven Roasting, Beef Wellington","Chateaubriand, holiday roast","Most tender roast available; lean, mild flavor, buttery texture.",beef_cut_r7_c4
+35,Tenderloin Steak,菲力牛排,Loin,Yes,$30 – $50,"Grilling, Skillet, Pan-Sear","Filet Mignon, tartare","Fork-tender, melt-in-your-mouth; very lean and mild.",beef_cut_r8_c4
+36,Top Sirloin Steak,上後腰脊牛排 / 頂級沙朗,Sirloin,Yes,$9 – $14,"Grilling, Skillet, Stir-Fry","Weeknight steak, kabobs",Versatile/affordable; firm texture with good beef flavor.,beef_cut_r1_c5
+37,Top Sirloin Petite Roast,上後腰脊小烤肉,Sirloin,Yes,$8 – $12,Oven Roasting,Roast beef sandwiches,Lean and economical; cook medium-rare to avoid dryness.,beef_cut_r2_c5
+38,Top Sirloin Filet,上後腰脊菲力,Sirloin,Yes,$11 – $16,"Grilling, Skillet, Broiling",Baseball steak,Thick cut like filet mignon but firmer and more flavorful.,beef_cut_r3_c5
+39,Coulotte Roast,上後腰脊蓋肉 / 臀肉蓋,Sirloin,Yes,$10 – $15,"Oven Roasting, Smoking",Picanha roast (Brazilian),Signature fat cap bastes meat; extremely flavorful and juicy.,beef_cut_r4_c5
+40,Coulotte Steak,上後腰脊蓋牛排,Sirloin,Yes,$12 – $18,"Grilling, Skillet, Smoking",Picanha steaks,Cut from the cap; tender and rich if fat cap is rendered.,beef_cut_r5_c5
+41,Tri-Tip Roast,三角肉,Sirloin,Yes,$10 – $16,"Oven Roasting, Grilling, Smoking",Santa Maria BBQ,Triangle shape; lean but flavorful; grain changes direction.,beef_cut_r6_c5
+42,Tri-Tip Steak,三角牛排,Sirloin,Yes,$11 – $17,"Grilling, Skillet, Broiling",Bistro steak,Individual steaks from roast; distinctive grain and chew.,beef_cut_r7_c5
+43,Petite Sirloin Steak,小沙朗牛排,Sirloin,Yes,$8 – $12,"Grilling, Skillet, Broiling","Steak tips, breakfast steak","Small, lean, quick-cooking; tough if overcooked.",beef_cut_r8_c5
+44,Sirloin Bavette Steak,後腰脊角尖牛排 / 貝腹肉,Sirloin,Yes,$12 – $18,"Grilling, Skillet, Stir-Fry","Flap steak, fajitas",Loose grain structure holds marinades; chewy but savory.,beef_cut_r9_c5
+45,Top Round Steak*,上後腿牛排,Round,Yes,$6 – $9,"Broiling, Skillet, Stir-Fry","London Broil, jerky",Lean and tough; best marinated or tenderized (cubed).,beef_cut_r2_c6
+46,Top Round Roast,上後腿肉,Round,Yes,$6 – $9,"Oven Roasting, Slow Roasting",Deli roast beef,"The ""Sunday Roast""; lean, easy to slice; can be dry.",beef_cut_r1_c6
+47,Bottom Round Roast,下後腿肉,Round,Yes,$6 – $8,"Oven Roasting, Braising, Stewing","Pot roast, Italian beef",Tougher than top round; tighter grain; needs moisture.,beef_cut_r3_c6
+48,Bottom Round Steak*,下後腿牛排,Round,Yes,$6 – $8,"Braising, Stewing, Swissing",Swiss/Chicken fried steak,Very lean/firm; requires mechanical tenderizing or slow heat.,beef_cut_r4_c6
+49,Bottom Round Rump Roast,臀肉 / 腿庫肉,Round,Yes,$5 – $8,"Oven Roasting, Braising",Pot roast,Ideally braised; flavorful but tough connective tissue.,beef_cut_r5_c6
+50,Eye of Round Roast,鯉魚管肉 / 後腿眼肉,Round,Yes,$6 – $9,"Oven Roasting, Slow Roasting",Roast beef sandwiches,Cylindrical; very lean/tough; looks tender but is not.,beef_cut_r6_c6
+51,Eye of Round Steak*,鯉魚管牛排 / 後腿眼牛排,Round,Yes,$6 – $9,"Skillet, Grilling, Braising",Minute steaks,"Sold thin; very lean; easy to overcook into ""shoe leather.""",beef_cut_r7_c6
+52,Kabobs*,烤肉串肉 / 骰子牛,Other,Yes,$8 – $12,"Grilling, Broiling",Skewers with vegetables,Usually sirloin/round chunks; best marinated.,beef_cut_r1_c7
+53,Stew Meat,燉肉塊,Other,No,$6 – $9,"Stewing, Pressure Cooking","Beef bourguignon, chili",Misc. tough trimmings; high collagen thickens stews.,beef_cut_r2_c7
+54,Strips*,牛肉條,Other,Yes,$8 – $12,"Stir-Fry, Skillet Cooking","Stroganoff, fajitas",Pre-cut strips; cooks very fast.,beef_cut_r3_c7
+55,Cubed Steak,機器嫩化牛排 / 什錦牛排,Other,No,$6 – $9,"Skillet, Braising, Frying",Chicken fried steak,Mechanically tenderized; distinct texture.,beef_cut_r4_c7
+56,Ground Beef,牛絞肉,Other,Varies,$4 – $8,"Skillet, Grilling, Baking","Burgers, meatloaf, bolognese","Texture depends on fat content (80/20 juicy, 90/10 crumbly).",beef_cut_r5_c7
+57,Shank Cross-Cut,帶骨牛腱 / 牛腱心切片,Shank,Yes,$5 – $8,"Braising, Stewing","Osso buco, soup",Contains marrow bone; tough/gelatinous; incredible broth.,beef_cut_r6_c7
+58,Tenderloin Tips,菲力邊角肉 / 骰子菲力,Other,Yes,$12 – $18,"Skillet, Grilling","Stroganoff, kabobs",Trimmings from tenderloin; just as tender as filet.,beef_cut_r7_c7
+59,Brisket Flat,牛胸腩 (扁平部位),Brisket,Yes,$8 – $12,"Braising, Smoking, Curing","Corned beef, pastrami",Leaner half of brisket; firm slice; dense grain.,beef_cut_r8_c6
+60,Brisket Point,牛胸腩 (尖頭部位),Brisket,No,$6 – $10,"Braising, Smoking","Burnt ends, shredded BBQ","Fatty half of brisket; luscious, moist, intense flavor.",beef_cut_r9_c6
+61,Inside Skirt*,內橫膈膜 / 內裙肉,Plate/Flank,No,$14 – $22,"Grilling, Skillet, Stir-Fry","Fajitas, carne asada",Long flat cut; open grain; marinade sponge; chewy but tasty.,beef_cut_r8_c7
+62,Flank Steak*,腹脅肉牛排 / 扇子肉,Plate/Flank,Yes,$12 – $18,"Grilling, Broiling, Marinate","London Broil, stir-fry",Flat oval cut; distinct grain; lean/chewy; slice against grain!,beef_cut_r9_c7
+63,"Short Ribs, Bone-In (lean)",帶骨牛小排 (瘦肉),Plate/Flank,No,$10 – $15,"Braising, Stewing",Braised short ribs,"Rich, fatty, melting texture.",beef_cut_r9_c5
