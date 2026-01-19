@@ -1,4 +1,4 @@
-# Meat Cut App
+# Meat Cut Guide App
 
 A full-stack application for browsing and managing beef cuts with detailed information, search capabilities, and Google Drive API integration for image storage/usage/update/sync and maintain datasets unique.
 
