@@ -43,36 +43,41 @@ export function initializeDriveClient() {
 }
 
 /**
- * Get or create the Google Drive folder for meat cut images
+ * Get or create a folder in Google Drive
  * @param {object} drive - Google Drive API client
+ * @param {string} folderName - Name of the folder
+ * @param {string} parentFolderId - Optional parent folder ID
+ * @param {string} envFolderId - Optional folder ID from environment variable
  * @returns {Promise<string>} - Folder ID
  */
-export async function getOrCreateImageFolder(drive) {
-  const folderName = process.env.GOOGLE_DRIVE_FOLDER_NAME || 'meat-cut-images';
-  const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
-  
+export async function getOrCreateFolder(drive, folderName, parentFolderId = null, envFolderId = null) {
   // If folder ID is provided in env, use it
-  if (folderId) {
+  if (envFolderId) {
     try {
-      console.log(`Verifying folder ID from env: ${folderId}`);
+      console.log(`Verifying folder ID: ${envFolderId}`);
       const response = await drive.files.get({
-        fileId: folderId,
+        fileId: envFolderId,
         fields: 'id, name',
         supportsAllDrives: true
       });
       console.log(`✓ Using folder: ${response.data.name} (ID: ${response.data.id})`);
       return response.data.id;
     } catch (error) {
-      console.error(`Error accessing folder ID ${folderId}:`, error.message);
-      // Don't fall back to creating a new one if a specific ID was requested but failed
+      console.error(`Error accessing folder ID ${envFolderId}:`, error.message);
       throw new Error(`Failed to access the specified Google Drive folder: ${error.message}`);
     }
+  }
+  
+  // Build search query
+  let query = `name='${folderName}' and mimeType='application/vnd.google-apps.folder' and trashed=false`;
+  if (parentFolderId) {
+    query += ` and '${parentFolderId}' in parents`;
   }
   
   // Search for existing folder
   try {
     const response = await drive.files.list({
-      q: `name='${folderName}' and mimeType='application/vnd.google-apps.folder' and trashed=false`,
+      q: query,
       fields: 'files(id, name)',
       spaces: 'drive',
       supportsAllDrives: true,
@@ -80,6 +85,7 @@ export async function getOrCreateImageFolder(drive) {
     });
     
     if (response.data.files && response.data.files.length > 0) {
+      console.log(`✓ Found existing folder: ${folderName} (ID: ${response.data.files[0].id})`);
       return response.data.files[0].id;
     }
   } catch (error) {
@@ -88,11 +94,17 @@ export async function getOrCreateImageFolder(drive) {
   
   // Create new folder if not found
   try {
+    const requestBody = {
+      name: folderName,
+      mimeType: 'application/vnd.google-apps.folder'
+    };
+    
+    if (parentFolderId) {
+      requestBody.parents = [parentFolderId];
+    }
+    
     const response = await drive.files.create({
-      requestBody: {
-        name: folderName,
-        mimeType: 'application/vnd.google-apps.folder'
-      },
+      requestBody: requestBody,
       fields: 'id',
       supportsAllDrives: true,
     });
@@ -105,4 +117,59 @@ export async function getOrCreateImageFolder(drive) {
   }
 }
 
-export default { initializeDriveClient, getOrCreateImageFolder };
+/**
+ * Get or create the Google Drive folder for meat cut images
+ * @param {object} drive - Google Drive API client
+ * @returns {Promise<string>} - Folder ID
+ */
+export async function getOrCreateImageFolder(drive) {
+  const imagesFolderName = process.env.GOOGLE_DRIVE_IMAGES_FOLDER_NAME || 'Images';
+  const baseFolderName = process.env.GOOGLE_DRIVE_BASE_FOLDER_NAME || 'meat-cut-app';
+  const baseFolderId = process.env.GOOGLE_DRIVE_BASE_FOLDER_ID;
+  
+  // High priority for the specific folder ID you provided
+  const imagesFolderId = process.env.GOOGLE_DRIVE_IMAGES_FOLDER_ID || 
+                        process.env.IMAGES_FOLDER ||
+                        process.env.GOOGLE_DRIVE_FOLDER_ID ||
+                        '1Vim-Q-65__G-1Fi0x23vk6Tm8EkfjnQN';
+  
+  // If a specific images folder ID is provided, use it directly
+  if (imagesFolderId && imagesFolderId !== 'root') {
+    return await getOrCreateFolder(drive, imagesFolderName, null, imagesFolderId);
+  }
+
+  // Otherwise, use the base folder structure
+  const parentId = await getOrCreateFolder(drive, baseFolderName, null, baseFolderId);
+  return await getOrCreateFolder(drive, imagesFolderName, parentId);
+}
+
+/**
+ * Get or create the CSV folder in Google Drive
+ * @param {object} drive - Google Drive API client
+ * @returns {Promise<string>} - Folder ID
+ */
+export async function getOrCreateCSVFolder(drive) {
+  const csvFolderName = process.env.GOOGLE_DRIVE_CSV_FOLDER_NAME || 'CSV';
+  const baseFolderName = process.env.GOOGLE_DRIVE_BASE_FOLDER_NAME || 'meat-cut-app';
+  const baseFolderId = process.env.GOOGLE_DRIVE_BASE_FOLDER_ID;
+  
+  // High priority for the specific folder ID you provided
+  const csvFolderId = process.env.GOOGLE_DRIVE_CSV_FOLDER_ID || 
+                     process.env.DRIVE_CSV_FOLDER;
+  
+  // If a specific CSV folder ID is provided, use it directly
+  if (csvFolderId && csvFolderId !== 'root') {
+    return await getOrCreateFolder(drive, csvFolderName, null, csvFolderId);
+  }
+
+  // Otherwise, use the base folder structure
+  const parentId = await getOrCreateFolder(drive, baseFolderName, null, baseFolderId);
+  return await getOrCreateFolder(drive, csvFolderName, parentId);
+}
+
+export default { 
+  initializeDriveClient, 
+  getOrCreateImageFolder,
+  getOrCreateCSVFolder,
+  getOrCreateFolder
+};

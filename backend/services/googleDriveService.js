@@ -1,14 +1,15 @@
-import { initializeDriveClient, getOrCreateImageFolder } from '../config/googleDrive.js';
+import { initializeDriveClient, getOrCreateImageFolder, getOrCreateCSVFolder } from '../config/googleDrive.js';
 import { Readable } from 'stream';
 
 /**
  * Google Drive Service
- * Handles all Google Drive operations for meat cut images
+ * Handles all Google Drive operations for meat cut images and CSV files
  */
 class GoogleDriveService {
   constructor() {
     this.drive = null;
     this.folderId = null;
+    this.csvFolderId = null;
     this.initialized = false;
   }
 
@@ -24,8 +25,11 @@ class GoogleDriveService {
       const { drive } = initializeDriveClient();
       this.drive = drive;
       this.folderId = await getOrCreateImageFolder(drive);
+      this.csvFolderId = await getOrCreateCSVFolder(drive);
       this.initialized = true;
       console.log('Google Drive service initialized');
+      console.log(`Images folder ID: ${this.folderId}`);
+      console.log(`CSV folder ID: ${this.csvFolderId}`);
     } catch (error) {
       console.error('Failed to initialize Google Drive service:', error);
       throw error;
@@ -251,6 +255,176 @@ class GoogleDriveService {
    */
   getFolderId() {
     return this.folderId;
+  }
+
+  /**
+   * Get CSV folder ID
+   * @returns {string}
+   */
+  getCSVFolderId() {
+    return this.csvFolderId;
+  }
+
+  /**
+   * Upload a CSV file to Google Drive
+   * @param {Buffer|string} csvData - CSV data (Buffer or string)
+   * @param {string} fileName - Name for the file
+   * @returns {Promise<{fileId: string, webViewLink: string}>}
+   */
+  async uploadCSV(csvData, fileName) {
+    await this.ensureInitialized();
+
+    try {
+      // Convert string to buffer if needed
+      let buffer;
+      if (typeof csvData === 'string') {
+        buffer = Buffer.from(csvData, 'utf-8');
+      } else {
+        buffer = csvData;
+      }
+
+      // Check if file already exists and delete it first
+      const existingFiles = await this.drive.files.list({
+        q: `name='${fileName}' and '${this.csvFolderId}' in parents and trashed=false`,
+        fields: 'files(id, name)',
+        supportsAllDrives: true,
+        includeItemsFromAllDrives: true
+      });
+
+      if (existingFiles.data.files && existingFiles.data.files.length > 0) {
+        // Delete existing file
+        for (const file of existingFiles.data.files) {
+          try {
+            await this.drive.files.delete({
+              fileId: file.id,
+              supportsAllDrives: true
+            });
+          } catch (err) {
+            // Ignore if file is already gone (404) or other non-fatal errors
+            if (err.code !== 404) {
+              console.warn(`Warning: Could not delete existing file ${file.id}:`, err.message);
+            }
+          }
+        }
+      }
+
+      // Upload new file
+      const response = await this.drive.files.create({
+        requestBody: {
+          name: fileName,
+          parents: [this.csvFolderId],
+          mimeType: 'text/csv'
+        },
+        media: {
+          mimeType: 'text/csv',
+          body: Readable.from(buffer)
+        },
+        fields: 'id, name, webViewLink, webContentLink',
+        supportsAllDrives: true,
+        supportsTeamDrives: true,
+      });
+
+      const fileId = response.data.id;
+
+      // Make file publicly accessible
+      await this.drive.permissions.create({
+        fileId: fileId,
+        requestBody: {
+          role: 'reader',
+          type: 'anyone'
+        },
+        supportsAllDrives: true,
+      });
+
+      return {
+        fileId: fileId,
+        webViewLink: response.data.webViewLink,
+        webContentLink: response.data.webContentLink,
+        fileName: fileName
+      };
+    } catch (error) {
+      console.error('Error uploading CSV to Google Drive:', error);
+      throw new Error(`Failed to upload CSV: ${error.message}`);
+    }
+  }
+
+  /**
+   * List all CSV files in the CSV folder
+   * @returns {Promise<Array>}
+   */
+  async listCSVFiles() {
+    await this.ensureInitialized();
+
+    try {
+      const response = await this.drive.files.list({
+        q: `'${this.csvFolderId}' in parents and mimeType='text/csv' and trashed=false`,
+        fields: 'files(id, name, mimeType, createdTime, modifiedTime, webViewLink)',
+        pageSize: 1000,
+        supportsAllDrives: true,
+        includeItemsFromAllDrives: true,
+        orderBy: 'modifiedTime desc'
+      });
+
+      return response.data.files || [];
+    } catch (error) {
+      console.error('Error listing CSV files from Google Drive:', error);
+      throw new Error(`Failed to list CSV files: ${error.message}`);
+    }
+  }
+
+  /**
+   * Download a CSV file from Google Drive
+   * @param {string} fileId - Google Drive file ID
+   * @returns {Promise<string>} - CSV content as string
+   */
+  async downloadCSV(fileId) {
+    await this.ensureInitialized();
+
+    try {
+      const response = await this.drive.files.get(
+        {
+          fileId: fileId,
+          alt: 'media',
+          supportsAllDrives: true,
+        },
+        { responseType: 'text' }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error('Error downloading CSV from Google Drive:', error);
+      throw new Error(`Failed to download CSV: ${error.message}`);
+    }
+  }
+
+  /**
+   * Delete a CSV file from Google Drive
+   * @param {string} fileId - Google Drive file ID
+   * @returns {Promise<boolean>}
+   */
+  async deleteCSV(fileId) {
+    await this.ensureInitialized();
+
+    if (!fileId) {
+      console.warn('No file ID provided for CSV deletion');
+      return false;
+    }
+
+    try {
+      await this.drive.files.delete({
+        fileId: fileId,
+        supportsAllDrives: true,
+      });
+
+      return true;
+    } catch (error) {
+      if (error.code === 404) {
+        console.warn(`CSV file ${fileId} not found, considering it deleted`);
+        return true;
+      }
+      console.error('Error deleting CSV from Google Drive:', error);
+      throw new Error(`Failed to delete CSV: ${error.message}`);
+    }
   }
 }
 

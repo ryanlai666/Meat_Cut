@@ -85,9 +85,13 @@ export class MeatCut {
    */
   static findAll(options = {}) {
     const db = getDatabase();
-    const { limit, offset } = options;
+    const { limit, offset, orderBy = 'name' } = options;
     
-    let query = 'SELECT * FROM meat_cuts ORDER BY id';
+    // Validate orderBy to prevent SQL injection
+    const validOrderBy = ['id', 'name', 'created_at', 'updated_at'].includes(orderBy) ? orderBy : 'name';
+    const orderDirection = options.orderDirection === 'DESC' ? 'DESC' : 'ASC';
+    
+    let query = `SELECT * FROM meat_cuts ORDER BY ${validOrderBy} ${orderDirection}`;
     if (limit) {
       query += ` LIMIT ${limit}`;
       if (offset) {

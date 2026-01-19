@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { Routes, Route, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { MeatCut, FilterState, SortOption } from './types';
 import { loadMeatCutData } from './utils/csvParser';
 import { filterAndSortMeatCuts, getPriceRangeFromCuts } from './utils/filters';
 import MeatCutDetail from './components/MeatCutDetail';
 import Sidebar from './components/Sidebar';
+import Admin from './pages/Admin';
+import AdminLogin from './pages/AdminLogin';
 
-function App() {
+function HomePage() {
   const [meatCuts, setMeatCuts] = useState<MeatCut[]>([]);
   const [selectedCut, setSelectedCut] = useState<MeatCut | null>(null);
   const [filters, setFilters] = useState<FilterState>({
@@ -16,18 +19,16 @@ function App() {
   });
   const [loading, setLoading] = useState(true);
 
-  // Filter test data - only show r1 cuts
+  // Use all meat cuts from the backend
   const testCuts = useMemo(() => {
-    return meatCuts.filter(cut => 
-      cut.imageReference.startsWith('beef_cut_r1_')
-    );
+    return meatCuts;
   }, [meatCuts]);
 
   // Get price range for slider
   const priceRange = useMemo(() => {
-    if (testCuts.length === 0) return [0, 100] as [number, number];
-    return getPriceRangeFromCuts(testCuts);
-  }, [testCuts]);
+    if (meatCuts.length === 0) return [0, 100] as [number, number];
+    return getPriceRangeFromCuts(meatCuts);
+  }, [meatCuts]);
 
   // Initialize price range when data loads
   useEffect(() => {
@@ -148,6 +149,34 @@ function App() {
         priceRange={priceRange}
       />
     </Box>
+  );
+}
+
+function MeatCutDetailPage() {
+  const { slug } = useParams<{ slug: string }>();
+  const [meatCut, setMeatCut] = useState<MeatCut | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // TODO: Load meat cut by slug from API
+    setLoading(false);
+  }, [slug]);
+
+  if (loading) {
+    return <Box>Loading...</Box>;
+  }
+
+  return <Box>Meat Cut Detail: {slug}</Box>;
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/meat/:slug" element={<MeatCutDetailPage />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin" element={<Admin />} />
+    </Routes>
   );
 }
 

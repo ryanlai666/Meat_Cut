@@ -105,7 +105,10 @@ export class SearchService {
         ...formatted,
         cookingMethods,
         recommendedDishes,
-        imageUrl: formatted.googleDriveImageUrl || null
+        imageUrl: formatted.googleDriveImageId ? `/api/drive/image/${formatted.googleDriveImageId}` : null,
+        // Include googleDriveImageId and googleDriveImageUrl for frontend use
+        googleDriveImageId: formatted.googleDriveImageId,
+        googleDriveImageUrl: formatted.googleDriveImageUrl
       };
     });
 

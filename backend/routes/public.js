@@ -91,9 +91,34 @@ router.get('/meat-cuts/:slug', asyncHandler(async (req, res) => {
     ...meatCut,
     cookingMethods,
     recommendedDishes,
-    imageUrl: meatCut.googleDriveImageUrl || null,
+    imageUrl: meatCut.googleDriveImageId ? `/api/drive/image/${meatCut.googleDriveImageId}` : null,
     shareUrl
   });
+}));
+
+/**
+ * GET /api/drive/image/:id
+ * Proxy an image from Google Drive
+ */
+router.get('/drive/image/:id', asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  
+  try {
+    const googleDriveService = (await import('../services/googleDriveService.js')).default;
+    const buffer = await googleDriveService.downloadImage(id);
+    
+    res.setHeader('Content-Type', 'image/jpeg');
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    res.send(buffer);
+  } catch (error) {
+    console.error(`Error proxying image ${id}:`, error.message);
+    res.status(404).json({
+      success: false,
+      error: {
+        message: 'Image not found'
+      }
+    });
+  }
 }));
 
 /**
@@ -114,9 +139,9 @@ router.get('/meat-cuts/:slug/image', asyncHandler(async (req, res) => {
     });
   }
 
-  // If Google Drive URL exists, redirect to it
-  if (meatCut.googleDriveImageUrl) {
-    return res.redirect(meatCut.googleDriveImageUrl);
+  // If Google Drive ID exists, redirect to proxy
+  if (meatCut.googleDriveImageId) {
+    return res.redirect(`/api/drive/image/${meatCut.googleDriveImageId}`);
   }
 
   // Otherwise, return 404 or placeholder

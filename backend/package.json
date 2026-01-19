@@ -8,7 +8,10 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "test:drive": "node scripts/testGoogleDrive.js",
-    "upload:images": "node scripts/uploadExistingImages.js"
+    "upload:images": "node scripts/uploadExistingImages.js",
+    "sync:drive": "node scripts/syncToGoogleDrive.js",
+    "fill:image-ids": "node scripts/fillGoogleDriveImageIds.js",
+    "sync:db-from-drive": "node scripts/syncDatabaseFromDriveCSV.js"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +21,8 @@
     "csv-parser": "^3.2.0",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "googleapis": "^170.1.0"
+    "googleapis": "^170.1.0",
+    "multer": "^2.0.2"
   },
   "devDependencies": {}
 }

@@ -15,6 +15,8 @@ export interface MeatCut {
   textureNotes: string;
   imageReference: string;
   imagePath: string;
+  googleDriveImageId?: string | null;
+  googleDriveImageUrl?: string | null;
 }
 
 export type SortOption = 'name' | 'cut' | 'cookingMethod' | 'price';

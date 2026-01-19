@@ -94,7 +94,9 @@ export function importMeatCutsFromCSV(csvPath) {
               priceMean: prices.mean,
               priceDisplay: priceDisplay,
               textureNotes: row['Texture & Notes'] || row['textureNotes'] || null,
-              imageReference: row['image reference'] || row['imageReference'] || row['image_reference'] || ''
+              imageReference: row['image reference'] || row['imageReference'] || row['image_reference'] || '',
+              googleDriveImageId: row['Google Drive Image ID'] || row['google_drive_image_id'] || row['googleDriveImageId'] || null,
+              googleDriveImageUrl: row['Google Drive Image URL'] || row['google_drive_image_url'] || row['googleDriveImageUrl'] || null
             };
             
             // Validate required fields
