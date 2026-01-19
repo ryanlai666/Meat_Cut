@@ -10,6 +10,8 @@ data/*.db-journal
 
 # Credentials
 credentials/
+*-key.json
+*.json.key
 
 # Logs
 *.log

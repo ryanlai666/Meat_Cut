@@ -38,5 +38,15 @@ lerna-debug.log*
 # Vite
 *.local
 
+# Secrets and Credentials
+*-key.json
+*.key
+backend/meat-buyer-guide-*-key.json
+
+# Database
+*.db
+*.sqlite
+*.db-journal
+
 # TypeScript
 *.tsbuildinfo

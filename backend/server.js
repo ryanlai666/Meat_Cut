@@ -2,6 +2,9 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { initializeDatabase, getDatabase } from './config/database.js';
 import { importDefaultCSV } from './utils/csvImporter.js';
+import publicRoutes from './routes/public.js';
+import adminRoutes from './routes/admin.js';
+import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 
 // Load environment variables
 dotenv.config();
@@ -10,8 +13,19 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// CORS middleware (for development)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, X-API-Key');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 // Initialize database and import data
 async function initializeApp() {
@@ -64,6 +78,14 @@ app.get('/api/health', (req, res) => {
     timestamp: new Date().toISOString() 
   });
 });
+
+// API Routes
+app.use('/api', publicRoutes);
+app.use('/api/admin', adminRoutes);
+
+// Error handling middleware (must be last)
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 // Start server
 app.listen(PORT, async () => {
